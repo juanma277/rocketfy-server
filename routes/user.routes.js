@@ -1,14 +1,20 @@
 const { Router } = require('express');
-const { usersGet, usersPut, usersPost, usersDelete } = require('../controllers/user.controller');
+const { check } = require('express-validator');
+
+const { usersPost } = require('../controllers/user.controller');
+
+const { isTeamValid, isNickNameValid } = require('../helpers/db-validators');
+const { validateFields } = require('../middlewares/validate-fields');
 
 const router = Router();
 
-router.get('/', usersGet);
-
-router.post('/', usersPost);
-
-router.put('/:id', usersPut);
-
-router.delete('/:id', usersDelete);
+router.post('/', [
+    check('name', 'Name is required').not().isEmpty(),
+    check('password', 'Password is required').not().isEmpty(),
+    check('nickname', 'Nickname is required').not().isEmpty(),
+    check('nickname').custom(isNickNameValid),
+    check('team').custom(isTeamValid),
+    validateFields
+], usersPost);
 
 module.exports = router;
