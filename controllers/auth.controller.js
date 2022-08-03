@@ -21,7 +21,7 @@ const login = async(req, res) => {
             });
         }
 
-        await User.findByIdAndUpdate(user._id, { last_connection: new Date(), new: true });
+        await User.findByIdAndUpdate(user._id, { last_connection: Date.now(), new: true });
 
         res.json({ token, name: user.name, nickname: user.nickname, team: user.team, last_connection: user.last_connection });
 

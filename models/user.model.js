@@ -24,7 +24,7 @@ const UserSchema = Schema({
     },
     last_connection: {
         type: Date,
-        default: new Date()
+        default: Date.now()
     }
 }, {
     timestamps: true,
