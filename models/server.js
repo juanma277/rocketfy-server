@@ -39,6 +39,8 @@ class Server {
         this.app.use('/api/users', require('../routes/user.routes'));
         this.app.use('/api/pokemon', require('../routes/pokemon.routes'));
         this.app.use('/api/teams', require('../routes/team.routes'));
+        this.app.use('/api/shippingorder', require('../routes/shippingorder.routes'));
+        this.app.use('/api/shipping', require('../routes/shipping.routes'));
     }
 
     listen() {
